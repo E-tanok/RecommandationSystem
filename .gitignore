@@ -1,1 +1,4 @@
 app.db
+ENV/
+__pycache__/
+recommendation/__pycache__/
