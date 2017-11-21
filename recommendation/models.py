@@ -24,7 +24,7 @@ def init_db():
     db.drop_all()
     db.create_all()
 
-        conn = psycopg2.connect(db)
+    conn = psycopg2.connect(db)
 
         #conn = psycopg2.connect('app.db')
 
