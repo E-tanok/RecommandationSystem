@@ -9,19 +9,21 @@ import os
 from .views import app
 
 # Create database connection object
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
+
+if os.environ.get('DATABASE_URL') is None:
+    db = SQLAlchemy(app)
+    conn = sqlite3.connect('app.db')
+
+else:
+    import urlparse
+    url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
+    db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
 
 def init_db():
     db.drop_all()
     db.create_all()
 
-    if os.environ.get('DATABASE_URL') is None:
-        conn = sqlite3.connect('app.db')
-
-    else:
-        import urlparse
-        url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
-        db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
         conn = psycopg2.connect(db)
 
         #conn = psycopg2.connect('app.db')
