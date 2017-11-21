@@ -16,8 +16,8 @@ if os.environ.get('DATABASE_URL') is None:
     conn = sqlite3.connect('app.db')
 
 else:
-    import urlparse
-    url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
+    import urllib.parse
+    url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
     db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
 
 def init_db():
