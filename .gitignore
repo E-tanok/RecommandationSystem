@@ -1,4 +1,5 @@
 ENV/
+BACKUP/
 app.db
 __pycache__/
 recommendation/__pycache__/
