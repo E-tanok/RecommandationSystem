@@ -10,13 +10,13 @@ from .views import app
 
 # Create database connection object
 #db = SQLAlchemy(app)
-
+db = SQLAlchemy(app)
 
 
 def init_db():
 
     if os.environ.get('DATABASE_URL') is None:
-        db = SQLAlchemy(app)
+        #db = SQLAlchemy(app)
         conn = sqlite3.connect('app.db')
 
     else:
@@ -26,7 +26,7 @@ def init_db():
         url = parse.urlparse(os.environ["DATABASE_URL"])
         conn = psycopg2.connect(database=url.path[1:],user=url.username,
         password=url.password,host=url.hostname,port=url.port)
-        db = SQLAlchemy(app)
+        #db = SQLAlchemy(app)
         #db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
 
     db.drop_all()
