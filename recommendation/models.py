@@ -19,7 +19,12 @@ def init_db():
         conn = sqlite3.connect('app.db')
 
     else:
-        conn = psycopg2.connect('app.db')
+        import urlparse
+        url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
+        db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
+        conn = psycopg2.connect(db)
+
+        #conn = psycopg2.connect('app.db')
 
     c = conn.cursor()
     c.executescript('drop table if exists Content;')
