@@ -14,10 +14,18 @@ db = SQLAlchemy(app)
 
 
 def init_db():
+    db.drop_all()
+    db.create_all()
 
     if os.environ.get('DATABASE_URL') is None:
         #db = SQLAlchemy(app)
         conn = sqlite3.connect('app.db')
+        c = conn.cursor()
+        df = pd.read_csv('recommandation_system_light.csv')
+        df.to_sql('Content', conn, if_exists='append', index=False)
+        db.session.commit()
+        #Content.query.all()
+        lg.warning('Database initialized!')
 
     else:
         from urllib import parse
@@ -26,19 +34,7 @@ def init_db():
         url = parse.urlparse(os.environ["DATABASE_URL"])
         conn = psycopg2.connect(database=url.path[1:],user=url.username,
         password=url.password,host=url.hostname,port=url.port)
-        #db = SQLAlchemy(app)
-        #db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
 
-    db.drop_all()
-    db.create_all()
-
-
-    c = conn.cursor()
-    #c.executescript('drop table if exists Content;')
-
-    df = pd.read_csv('recommandation_system_light.csv')
-    df.to_sql('Content', conn, if_exists='append', index=False)
-
-    db.session.commit()
-    #Content.query.all()
-    lg.warning('Database initialized!')
+        db.session.commit()
+        #Content.query.all()
+        lg.warning('Database initialized!')
