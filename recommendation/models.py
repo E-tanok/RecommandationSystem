@@ -34,7 +34,7 @@ def init_db():
 
 
     c = conn.cursor()
-    c.executescript('drop table if exists Content;')
+    #c.executescript('drop table if exists Content;')
 
     df = pd.read_csv('recommandation_system_light.csv')
     df.to_sql('Content', conn, if_exists='append', index=False)
