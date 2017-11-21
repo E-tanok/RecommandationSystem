@@ -1,5 +1,5 @@
-app.db
 ENV/
+app.db
 __pycache__/
 recommendation/__pycache__/
 TEST.py
