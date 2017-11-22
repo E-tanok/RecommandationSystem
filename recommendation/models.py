@@ -40,7 +40,7 @@ def init_db():
         password=url.password,host=url.hostname,port=url.port)
 
         c = conn.cursor()
-        c.executescript('drop table if exists Content;')
+        c.execute('drop table if exists Content;')
 
         myfile = open(r'recommandation_system_light.csv', 'r')
         cur.copy_from(myfile, table='Content', sep=',')
