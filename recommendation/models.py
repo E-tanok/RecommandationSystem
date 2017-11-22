@@ -38,8 +38,14 @@ def init_db():
         conn = psycopg2.connect(database=url.path[1:],user=url.username,
         password=url.password,host=url.hostname,port=url.port)
 
-        df = pd.read_csv('recommandation_system_light.csv')
-        df.to_sql('Content', conn, if_exists='append', index=False)
+        c = conn.cursor()
+        c.executescript('drop table if exists Content;')
+
+        myfile = open(r'recommandation_system_light.csv', 'r')
+        cur.copy_from(myfile, table='Content', sep=',')
+
+        #df = pd.read_csv('recommandation_system_light.csv')
+        #df.to_sql('Content', conn, if_exists='append', index=False)
 
         db.session.commit()
         #Content.query.all()
