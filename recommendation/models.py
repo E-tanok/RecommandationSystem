@@ -41,8 +41,8 @@ def init_db():
 
         df = pd.read_csv('recommandation_system_light.csv')
         engine = create_engine(os.environ["DATABASE_URL"])
-        df.to_sql("Content", engine)
-        #df.to_sql("Content", engine, if_exists='replace')
+        #df.to_sql("Content", engine)
+        df.to_sql("Content", engine, if_exists='replace')
 
         db.session.commit()
         lg.warning('Database initialized!')
