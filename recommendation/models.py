@@ -36,7 +36,7 @@ def init_db():
         password=url.password,host=url.hostname,port=url.port)
 
         c = conn.cursor()
-        c.execute("DROP TABLE IF EXISTS public.Content;")
+        c.execute("DROP TABLE IF EXISTS ddb9ggrmp3oo7b.Content;")
 
 
         df = pd.read_csv('recommandation_system_light.csv')
