@@ -36,12 +36,13 @@ def init_db():
         password=url.password,host=url.hostname,port=url.port)
 
         #c = conn.cursor()
-        #c.execute("DROP TABLE IF EXISTS ddb9ggrmp3oo7b.Content;")
+        #c.execute("DROP TABLE IF EXISTS Content;")
 
 
         df = pd.read_csv('recommandation_system_light.csv')
         engine = create_engine(os.environ["DATABASE_URL"])
-        df.to_sql("Content", engine, if_exists='replace')
+        df.to_sql("Content", engine)
+        #df.to_sql("Content", engine, if_exists='replace')
 
         db.session.commit()
         lg.warning('Database initialized!')
