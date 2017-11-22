@@ -6,7 +6,7 @@ import psycopg2
 import os
 
 from .views import app
-from .config import SQLALCHEMY_DATABASE_URI
+from config import SQLALCHEMY_DATABASE_URI
 
 db = SQLAlchemy(app)
 
