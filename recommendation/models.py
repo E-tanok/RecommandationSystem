@@ -32,6 +32,7 @@ def init_db():
 
     else:
         from urllib import parse
+        from sqlalchemy import create_engine
         #db = SQLAlchemy(app)
         parse.uses_netloc.append("postgres")
         url = parse.urlparse(os.environ["DATABASE_URL"])
@@ -44,7 +45,9 @@ def init_db():
         myfile = open(r'recommandation_system_light.csv', 'r')
         cur.copy_from(myfile, table='Content', sep=',')
 
-        #df = pd.read_csv('recommandation_system_light.csv')
+        df = pd.read_csv('recommandation_system_light.csv')
+        engine = create_engine(os.environ["DATABASE_URL"])
+        df.to_sql("Content", engine)
         #df.to_sql('Content', conn, if_exists='append', index=False)
 
         db.session.commit()

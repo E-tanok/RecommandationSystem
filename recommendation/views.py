@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, request
 import sqlite3
 import json
+from urllib import parse
+from sqlalchemy import create_engine
 #from flask import g
 
 app = Flask(__name__)
@@ -16,7 +18,17 @@ from . import models
 def index(movie=None,querry=None,results=None):
     if request.method == 'POST':
         movie= request.form['movie']
-        conn = sqlite3.connect('app.db')
+        if os.environ.get('DATABASE_URL') is None:
+
+            conn = sqlite3.connect('app.db')
+
+        else:
+            parse.uses_netloc.append("postgres")
+            url = parse.urlparse(os.environ["DATABASE_URL"])
+            conn = psycopg2.connect(database=url.path[1:],user=url.username,
+            password=url.password,host=url.hostname,port=url.port)
+
+        #conn = sqlite3.connect('app.db')
         c = conn.cursor()
 
         #myneighb_id =['1','2','3','4','5']
