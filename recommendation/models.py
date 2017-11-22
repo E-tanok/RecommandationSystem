@@ -6,6 +6,7 @@ import psycopg2
 import os
 
 from .views import app
+from .config import SQLALCHEMY_DATABASE_URI
 
 db = SQLAlchemy(app)
 
@@ -46,3 +47,4 @@ def init_db():
 
         db.session.commit()
         lg.warning('Database initialized!')
+        lg.warning('%s'%SQLALCHEMY_DATABASE_URI)
