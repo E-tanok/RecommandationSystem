@@ -7,7 +7,8 @@ import os
 
 from .views import app
 
-# Create database connection object
+
+
 #db = SQLAlchemy(app)
 db = SQLAlchemy(app)
 
@@ -32,3 +33,11 @@ def init_db():
     else:
         from urllib import parse
         #db = SQLAlchemy(app)
+        parse.uses_netloc.append("postgres")
+        url = parse.urlparse(os.environ["DATABASE_URL"])
+        conn = psycopg2.connect(database=url.path[1:],user=url.username,
+        password=url.password,host=url.hostname,port=url.port)
+
+        db.session.commit()
+        #Content.query.all()
+        lg.warning('Database initialized!')
