@@ -37,6 +37,7 @@ def init_db():
 
         c = conn.cursor()
         c.execute('drop table if exists Content;')
+        db.session.commit()
 
         df = pd.read_csv('recommandation_system_light.csv')
         engine = create_engine(os.environ["DATABASE_URL"])
