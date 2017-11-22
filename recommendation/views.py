@@ -12,6 +12,7 @@ app.config.from_object('config')
 #from .utils import find_content
 
 from . import models
+from config import SQLALCHEMY_DATABASE_URI
 #def index(movie=None,movie_to_display=None):
 #if movie!=None :
 @app.route('/', methods =['GET','POST'])
@@ -25,7 +26,7 @@ def index(movie=None,querry=None,results=None):
 
         else:
             parse.uses_netloc.append("postgres")
-            url = parse.urlparse(os.environ["DATABASE_URL"])
+            url = parse.urlparse(SQLALCHEMY_DATABASE_URI)
             conn = psycopg2.connect(database=url.path[1:],user=url.username,
             password=url.password,host=url.hostname,port=url.port)
 

@@ -32,7 +32,7 @@ def init_db():
         from sqlalchemy import create_engine
 
         parse.uses_netloc.append("postgres")
-        url = parse.urlparse(os.environ["DATABASE_URL"])
+        url = parse.urlparse(SQLALCHEMY_DATABASE_URI)
         conn = psycopg2.connect(database=url.path[1:],user=url.username,
         password=url.password,host=url.hostname,port=url.port)
 
@@ -41,7 +41,7 @@ def init_db():
 
 
         df = pd.read_csv('recommandation_system_light.csv')
-        engine = create_engine(os.environ["DATABASE_URL"])
+        engine = create_engine(SQLALCHEMY_DATABASE_URI)
         #df.to_sql("Content", engine)
         df.to_sql("Content", engine, if_exists='replace')
 
