@@ -7,9 +7,6 @@ import os
 
 from .views import app
 
-
-
-#db = SQLAlchemy(app)
 db = SQLAlchemy(app)
 
 
@@ -27,13 +24,12 @@ def init_db():
         df.to_sql('Content', conn, if_exists='append', index=False)
 
         db.session.commit()
-        #Content.query.all()
         lg.warning('Database initialized!')
 
     else:
         from urllib import parse
         from sqlalchemy import create_engine
-        #db = SQLAlchemy(app)
+
         parse.uses_netloc.append("postgres")
         url = parse.urlparse(os.environ["DATABASE_URL"])
         conn = psycopg2.connect(database=url.path[1:],user=url.username,
@@ -42,14 +38,9 @@ def init_db():
         c = conn.cursor()
         c.execute('drop table if exists Content;')
 
-        #myfile = open(r'recommandation_system_light.csv', 'r')
-        #c.copy_from(myfile, table='Content', sep=',')
-
         df = pd.read_csv('recommandation_system_light.csv')
         engine = create_engine(os.environ["DATABASE_URL"])
         df.to_sql("Content", engine)
-        #df.to_sql('Content', conn, if_exists='append', index=False)
 
         db.session.commit()
-        #Content.query.all()
         lg.warning('Database initialized!')

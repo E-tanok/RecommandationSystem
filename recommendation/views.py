@@ -3,6 +3,7 @@ import sqlite3
 import json
 from urllib import parse
 from sqlalchemy import create_engine
+import os
 #from flask import g
 
 app = Flask(__name__)
@@ -19,7 +20,6 @@ def index(movie=None,querry=None,results=None):
     if request.method == 'POST':
         movie= request.form['movie']
         if os.environ.get('DATABASE_URL') is None:
-
             conn = sqlite3.connect('app.db')
 
         else:
@@ -28,10 +28,7 @@ def index(movie=None,querry=None,results=None):
             conn = psycopg2.connect(database=url.path[1:],user=url.username,
             password=url.password,host=url.hostname,port=url.port)
 
-        #conn = sqlite3.connect('app.db')
         c = conn.cursor()
-
-        #myneighb_id =['1','2','3','4','5']
         myneighbs = []
         results = []
 
