@@ -5,16 +5,13 @@ from urllib import parse
 from sqlalchemy import create_engine
 import os
 import psycopg2
-#from flask import g
+from . import models
+from config import SQLALCHEMY_DATABASE_URI
 
 app = Flask(__name__)
 app.config.from_object('config')
-#from .utils import find_content
 
-from . import models
-from config import SQLALCHEMY_DATABASE_URI
-#def index(movie=None,movie_to_display=None):
-#if movie!=None :
+
 @app.route('/', methods =['GET','POST'])
 @app.route('/?', methods =['GET','POST'])
 @app.route('/index/', methods =['GET','POST'])
