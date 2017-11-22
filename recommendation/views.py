@@ -4,6 +4,7 @@ import json
 from urllib import parse
 from sqlalchemy import create_engine
 import os
+import psycopg2
 #from flask import g
 
 app = Flask(__name__)
