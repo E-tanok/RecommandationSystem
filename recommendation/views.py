@@ -5,11 +5,11 @@ from urllib import parse
 from sqlalchemy import create_engine
 import os
 import psycopg2
-#from flask import g
+
 
 app = Flask(__name__)
 app.config.from_object('config')
-#from .utils import find_content
+
 
 from . import models
 from config import SQLALCHEMY_DATABASE_URI
@@ -18,6 +18,7 @@ from config import SQLALCHEMY_DATABASE_URI
 @app.route('/?', methods =['GET','POST'])
 @app.route('/index/', methods =['GET','POST'])
 def index(movie=None,querry=None,results=None):
+    
     if request.method == 'POST':
         movie= request.form['movie']
         if os.environ.get('DATABASE_URL') is None:
@@ -51,3 +52,7 @@ def index(movie=None,querry=None,results=None):
         conn.close()
 
     return render_template('index.html',movie=movie,querry=querry,results=results)
+
+@app.route('/movies_list/')
+def movies_list():
+    return render_template('movies_list.html')

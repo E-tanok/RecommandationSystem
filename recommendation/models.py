@@ -21,7 +21,7 @@ def init_db():
         c = conn.cursor()
         c.executescript('drop table if exists Content;')
 
-        df = pd.read_csv('recommandation_system_light.csv')
+        df = pd.read_csv('recommandation_system_light.csv',encoding ='utf-8')
         df.to_sql('Content', conn, if_exists='append', index=False)
 
         db.session.commit()
@@ -40,7 +40,7 @@ def init_db():
         #c.execute("DROP TABLE IF EXISTS Content;")
 
 
-        df = pd.read_csv('recommandation_system_light.csv')
+        df = pd.read_csv('recommandation_system_light.csv',encoding ='utf-8')
         engine = create_engine(SQLALCHEMY_DATABASE_URI)
         #df.to_sql("Content", engine)
         df.to_sql("Content", engine, if_exists='replace')
