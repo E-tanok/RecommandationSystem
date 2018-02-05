@@ -14,7 +14,6 @@ db = SQLAlchemy(app)
 def init_db():
     db.drop_all()
     db.create_all()
-init_db()
 
     if os.environ.get('DATABASE_URL') is None:
 
