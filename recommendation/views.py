@@ -45,7 +45,8 @@ def index(movie=None,querry=None,results=None):
             myneighbs =[neighb1,neighb2,neighb3,neighb4,neighb5]
 
         for neighboor in myneighbs:
-            for row2 in c.execute("SELECT moviesynthesis FROM content WHERE movie_index='%s'" % neighboor):
+            for row2 in session.query(content.movie_index).filter_by(movie_index='%s'%neighboor):
+                
                 clean_row2 = row2[0].replace("'", "\"")
                 querry2 = json.loads(clean_row2)
                 results.append(querry2)
