@@ -18,7 +18,7 @@ from config import SQLALCHEMY_DATABASE_URI
 @app.route('/?', methods =['GET','POST'])
 @app.route('/index/', methods =['GET','POST'])
 def index(movie=None,querry=None,results=None):
-    
+
     if request.method == 'POST':
         movie= request.form['movie']
         if os.environ.get('DATABASE_URL') is None:
@@ -34,7 +34,7 @@ def index(movie=None,querry=None,results=None):
         myneighbs = []
         results = []
 
-        for row in c.execute("SELECT neigbhoors FROM Content WHERE original_title='%s'" % movie):
+        for row in c.execute("SELECT neigbhoors FROM content WHERE original_title='%s'" % movie):
             clean_row = row[0].replace("'", "\"")
             querry = json.loads(clean_row)
             neighb1 = querry['neighb1']
@@ -45,7 +45,7 @@ def index(movie=None,querry=None,results=None):
             myneighbs =[neighb1,neighb2,neighb3,neighb4,neighb5]
 
         for neighboor in myneighbs:
-            for row2 in c.execute("SELECT moviesynthesis FROM Content WHERE movie_index='%s'" % neighboor):
+            for row2 in c.execute("SELECT moviesynthesis FROM content WHERE movie_index='%s'" % neighboor):
                 clean_row2 = row2[0].replace("'", "\"")
                 querry2 = json.loads(clean_row2)
                 results.append(querry2)

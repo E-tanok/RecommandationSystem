@@ -14,15 +14,16 @@ db = SQLAlchemy(app)
 def init_db():
     db.drop_all()
     db.create_all()
-"""
+init_db()
+
     if os.environ.get('DATABASE_URL') is None:
 
         conn = sqlite3.connect('app.db')
         c = conn.cursor()
-        c.executescript('drop table if exists Content;')
+        c.executescript('drop table if exists content;')
 
         df = pd.read_csv('recommandation_system_light.csv',encoding ='utf-8')
-        df.to_sql('Content', conn, if_exists='append', index=False)
+        df.to_sql('content', conn, if_exists='append', index=False)
 
         db.session.commit()
         lg.warning('Database initialized!')
@@ -37,15 +38,14 @@ def init_db():
         password=url.password,host=url.hostname,port=url.port)
 
         #c = conn.cursor()
-        #c.execute("DROP TABLE IF EXISTS Content;")
+        #c.execute("DROP TABLE IF EXISTS content;")
 
 
         df = pd.read_csv('recommandation_system_light.csv',encoding ='utf-8')
         engine = create_engine(SQLALCHEMY_DATABASE_URI)
-        #df.to_sql("Content", engine)
-        df.to_sql("Content", engine, if_exists='replace')
+        #df.to_sql("content", engine)
+        df.to_sql("content", engine, if_exists='replace')
 
         db.session.commit()
         lg.warning('Database initialized!')
         lg.warning('%s'%SQLALCHEMY_DATABASE_URI)
-"""
