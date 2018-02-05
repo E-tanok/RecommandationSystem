@@ -6,10 +6,6 @@ from sqlalchemy import create_engine
 import os
 import psycopg2
 
-from config import SQLALCHEMY_DATABASE_URI
-from sqlalchemy.orm import sessionmaker
-engine = create_engine(SQLALCHEMY_DATABASE_URI)
-session = sessionmaker(bind=engine)
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -37,8 +33,8 @@ def index(movie=None,querry=None,results=None):
         c = conn.cursor()
         myneighbs = []
         results = []
-
-        for row in session.query(content.neigbhoors).filter_by(original_title='%s'%movie):
+        querry = c.execute("SELECT neigbhoors FROM content WHERE original_title='%s'" % movie)
+        for row in querry.fetchall():
             clean_row = row[0].replace("'", "\"")
             querry = json.loads(clean_row)
             neighb1 = querry['neighb1']
@@ -49,8 +45,8 @@ def index(movie=None,querry=None,results=None):
             myneighbs =[neighb1,neighb2,neighb3,neighb4,neighb5]
 
         for neighboor in myneighbs:
-            for row2 in session.query(content.movie_index).filter_by(movie_index='%s'%neighboor):
 
+            for row2 in c.execute("SELECT moviesynthesis FROM content WHERE movie_index='%s'" % neighboor):
                 clean_row2 = row2[0].replace("'", "\"")
                 querry2 = json.loads(clean_row2)
                 results.append(querry2)
