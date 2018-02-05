@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 def init_db():
     db.drop_all()
     db.create_all()
-
+"""
     if os.environ.get('DATABASE_URL') is None:
 
         conn = sqlite3.connect('app.db')
@@ -48,3 +48,4 @@ def init_db():
         db.session.commit()
         lg.warning('Database initialized!')
         lg.warning('%s'%SQLALCHEMY_DATABASE_URI)
+"""
