@@ -5,6 +5,7 @@ from urllib import parse
 from sqlalchemy import create_engine
 import os
 import psycopg2
+import logging as lg
 
 
 app = Flask(__name__)
@@ -33,8 +34,15 @@ def index(movie=None,querry=None,results=None):
         c = conn.cursor()
         myneighbs = []
         results = []
-        querry = c.execute("SELECT neigbhoors FROM content WHERE original_title='%s'" % movie)
-        for row in querry.fetchall():
+
+        lg.warning('movie is : ')
+        lg.warning('%s'%movie)
+        lg.warning('connection is : ')
+        lg.warning('%s'%c)
+
+
+
+        for row in c.execute("SELECT neigbhoors FROM content WHERE original_title='%s'" % movie):
             clean_row = row[0].replace("'", "\"")
             querry = json.loads(clean_row)
             neighb1 = querry['neighb1']
