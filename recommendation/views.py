@@ -6,6 +6,10 @@ from sqlalchemy import create_engine
 import os
 import psycopg2
 
+from config import SQLALCHEMY_DATABASE_URI
+from sqlalchemy.orm import sessionmaker
+engine = create_engine(SQLALCHEMY_DATABASE_URI)
+session = sessionmaker(bind=engine)
 
 app = Flask(__name__)
 app.config.from_object('config')
