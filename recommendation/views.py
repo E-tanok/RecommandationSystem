@@ -34,7 +34,7 @@ def index(movie=None,querry=None,results=None):
         myneighbs = []
         results = []
 
-        for row in c.execute("SELECT neigbhoors FROM content WHERE original_title='%s'" % movie):
+        for row in session.query(content.neigbhoors).filter_by(original_title='%s'%movie):
             clean_row = row[0].replace("'", "\"")
             querry = json.loads(clean_row)
             neighb1 = querry['neighb1']
@@ -46,7 +46,7 @@ def index(movie=None,querry=None,results=None):
 
         for neighboor in myneighbs:
             for row2 in session.query(content.movie_index).filter_by(movie_index='%s'%neighboor):
-                
+
                 clean_row2 = row2[0].replace("'", "\"")
                 querry2 = json.loads(clean_row2)
                 results.append(querry2)
