@@ -31,15 +31,12 @@ def index(movie=None,querry=None,results=None):
             conn = psycopg2.connect(database=url.path[1:],user=url.username,
             password=url.password,host=url.hostname,port=url.port)
 
-        print(conn)
+
         c = conn.cursor()
         myneighbs = []
         results = []
         if len(movie)>0:
             query_df = pd.read_sql("SELECT neigbhoors FROM content WHERE original_title='%s'"%movie, con=conn)
-            print("\n \n \n")
-            print("querry_df is : ")
-            print(query_df)
 
             clean_row = query_df['neigbhoors'][0].replace("'", "\"")
             querry = json.loads(clean_row)
@@ -49,25 +46,12 @@ def index(movie=None,querry=None,results=None):
             neighb4 = querry['neighb4']
             neighb5 = querry['neighb5']
             myneighbs =[neighb1,neighb2,neighb3,neighb4,neighb5]
-            print("\n \n \n")
-            print("neighbs are : ")
-            print(myneighbs)
 
             for neighboor in myneighbs:
                 query_df = pd.read_sql("SELECT moviesynthesis FROM content WHERE movie_index='%s'"%neighboor, con=conn)
                 row2 = query_df['moviesynthesis'][0]
-                print("\n \n \n")
-                print("row_2 is : ")
-                print(row2)
-                print("\n \n \n")
-                print("clean_row_2 is : ")
                 clean_row2 = row2.replace("'", "\"")
-                print(clean_row2)
-                print("\n \n \n")
-
-
-                print("error?")
-                print("\n \n \n")
+                
                 querry2 = json.loads(clean_row2)
                 results.append(querry2)
         conn.close()
