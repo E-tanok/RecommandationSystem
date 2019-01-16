@@ -26,7 +26,7 @@ Here are the instructions which allows to launch the application :
 
 ### Once the application is launched
 
-Just write (or copy/paste) the message of your choice and press "ENTER":
+Select the movie of your choice in the html list and press "ENTER":
 ![alt text](https://github.com/E-tanok/Recommandation_movie_recommendation-system/blob/master/project_instructions/selecting_movie.png)
 
 
