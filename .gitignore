@@ -4,3 +4,4 @@ app.db
 __pycache__/
 recommendation/__pycache__/
 TEST.py
+recommandation_system_light_.csv
