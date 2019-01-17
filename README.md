@@ -3,8 +3,9 @@
 This project is a flask app which allows to recommend 5 movies which are close to a chosen one.
 The original datasets are in the "original_files" folder. A feature engineering has been by usig the data in their columns.
 The recommendation is mostly based on the movies genders :
-- A dimensionality reduction has been done with t-SNE
-
+- A dimensionality reduction has been done with t-SNE, as shown below:
+![alt text](https://github.com/E-tanok/Recommandation_movie_recommendation-system/blob/master/project_instructions/pca_tsne.png)
+*Above, the result of the dataset embeding with t-SNE : each color correspond to a specific movie category. Since my objective was mainly to make a recommendation based on categories, this embeding seemed great to me*
 
 - After a satisfying embeding were found :
 --> The 5 closest movies to each movies have been computed
