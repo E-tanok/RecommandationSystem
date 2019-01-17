@@ -35,3 +35,8 @@ Select the movie of your choice in the html list and press "ENTER":
 
 The application query the file (or the database) and shows you the 5 closest movies from your selection (Below is an example of the result with the "Independance Day" recommendation ):
 ![alt text](https://github.com/E-tanok/Recommandation_movie_recommendation-system/blob/master/project_instructions/results.png)
+
+
+# Acknowledgement :
+
+This project have been made thanks to modifications on the [HTML5 template](https://templated.co/hielo) provided by [templated.co](https://templated.co/).
