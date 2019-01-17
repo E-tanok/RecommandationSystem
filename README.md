@@ -39,4 +39,4 @@ The application query the file (or the database) and shows you the 5 closest mov
 
 # Acknowledgement :
 
-This project have been made thanks to modifications on the [HTML5 template](https://templated.co/hielo) provided by [templated.co](https://templated.co/).
+This project was realized thanks to modifications on the [HTML5 template](https://templated.co/hielo) provided by [templated.co](https://templated.co/).
